@@ -88,12 +88,16 @@
 #    state: link
 #  notify: restart nginx_exporter
 - name: copy
+  become: true
+  become_user: root
   ansible.builtin.copy:
     src: "{{ nginx_exporter_binary_local_dir }}/nginx-prometheus-exporter"
     dest: "{{ nginx_exporter_dist_dir }}/nginx_exporter"
     mode: '0755'
     owner: root
     group: root
+  when:
+    - nginx_exporter_binary_local_dir | length > 0
 
 - name: config
   become: true
@@ -107,6 +111,8 @@
   notify: restart nginx_exporter
 
 - name: Copy the nginx_exporter systemd service file
+  become: true
+  become_user: root
   ansible.builtin.template:
     src: nginx_exporter.systemd.j2
     dest: /etc/systemd/system/nginx_exporter.service
