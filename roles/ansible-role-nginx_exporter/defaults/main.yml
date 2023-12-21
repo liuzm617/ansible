@@ -13,7 +13,7 @@ nginx_exporter_signature: "nginx-prometheus-exporter-{{ nginx_exporter_version }
 #nginx_exporter_dist_dir: "{{ prometheus_exporter_dist_dir }}/{{ nginx_exporter_signature }}"
 nginx_exporter_dist_dir: "/usr/local/bin"
 nginx_exporter_tarball_url: "https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v{{ nginx_exporter_version }}/{{ nginx_exporter_signature }}.tar.gz"
-nginx_exporter_program: "{{ prometheus_exporter_dir }}/nginx_exporter"
+nginx_exporter_program: "{{ nginx_exporter_dist_dir }}/nginx_exporter"
 nginx_exporter_home: "/var/lib/nginx_exporter"
 nginx_exporter_home_manage: true
 nginx_exporter_status_endpoint: "http://localhost/nginx_stats"
