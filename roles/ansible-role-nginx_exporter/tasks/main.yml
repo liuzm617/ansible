@@ -106,8 +106,18 @@
     mode: "u=rw,go=r"
   notify: restart nginx_exporter
 
-- name: install service
-  include: service-{{ prometheus_exporter_service_mgr }}.yml
+- name: Copy the nginx_exporter systemd service file
+  ansible.builtin.template:
+    src: nginx_exporter.systemd.j2
+    dest: /etc/systemd/system/nginx_exporter.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart nginx_exporter
+
+
+#- name: install service
+#  include: service-{{ prometheus_exporter_service_mgr }}.yml
 
 - name: Service Enabled
   become: true
@@ -115,7 +125,7 @@
   service:
     name: nginx_exporter
     enabled: "{{ nginx_exporter_service_enable }}"
-    use: "{{ prometheus_exporter_service_mgr }}"
+#    use: "{{ prometheus_exporter_service_mgr }}"
   when: nginx_exporter_service_manage
 
 - name: Service State
@@ -124,6 +134,6 @@
   service:
     name: nginx_exporter
     state: "{{ nginx_exporter_service_state }}"
-    use: "{{ prometheus_exporter_service_mgr }}"
+#    use: "{{ prometheus_exporter_service_mgr }}"
   register: _nginx_exporter_service_state
   when: nginx_exporter_service_manage
