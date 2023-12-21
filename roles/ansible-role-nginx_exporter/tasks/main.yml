@@ -89,8 +89,8 @@
 #  notify: restart nginx_exporter
 - name: copy
   ansible.builtin.copy:
-    src: "{{ nginx_exporter_dist_dir }}/nginx-prometheus-exporter"
-    dest: "{{ prometheus_exporter_dir }}/nginx_exporter"
+    src: "{{ nginx_exporter_binary_local_dir }}/nginx-prometheus-exporter"
+    dest: "{{ nginx_exporter_dist_dir }}/nginx_exporter"
     mode: '0755'
     owner: root
     group: root
