@@ -19,7 +19,7 @@ nginx_exporter_home_manage: true
 nginx_exporter_status_endpoint: "http://localhost/nginx_stats"
 nginx_exporter_options:
   - '-nginx.retries 32768'
-  - '-nginx.scrape-uri {{ nginx_exporter_endpoint }}'
+  - '-nginx.scrape-uri {{ nginx_exporter_status_endpoint }}'
 
 nginx_exporter_config_file: /etc/default/nginx_exporter
 nginx_exporter_pid_path: "/var/run"
