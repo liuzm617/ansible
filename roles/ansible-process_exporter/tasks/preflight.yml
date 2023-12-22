@@ -40,13 +40,13 @@
   delegate_to: localhost
   run_once: true
 
-- name: Get checksum list from github
-  set_fact:
-    _checksums: "{{ lookup('url', 'https://github.com/ncabatoff/process-exporter/releases/download/v' + process_exporter_version + '/checksums.txt', wantlist=True) | list }}"
-  run_once: true
-
-- name: "Get checksum for {{ go_arch }} architecture"
-  set_fact:
-    process_exporter_checksum: "{{ item.split(' ')[0] }}"
-  with_items: "{{ _checksums }}"
-  when: "('linux-' + go_arch + '.tar.gz') in item"
+#- name: Get checksum list from github
+#  set_fact:
+#    _checksums: "{{ lookup('url', 'https://github.com/ncabatoff/process-exporter/releases/download/v' + process_exporter_version + '/checksums.txt', wantlist=True) | list }}"
+#  run_once: true
+#
+#- name: "Get checksum for {{ go_arch }} architecture"
+#  set_fact:
+#    process_exporter_checksum: "{{ item.split(' ')[0] }}"
+#  with_items: "{{ _checksums }}"
+#  when: "('linux-' + go_arch + '.tar.gz') in item"
